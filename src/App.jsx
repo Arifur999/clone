@@ -17,7 +17,7 @@ function App() {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:5000/api/users", {
+      const res = await fetch("https://fb-server-one.vercel.app/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -56,7 +56,7 @@ function App() {
 
           {/* RIGHT SIDE FORM */}
           <div className="w-full flex justify-center md:justify-end md:mt-[-40px]">
-            <div className="w-[700px] bg-white rounded-lg shadow-[0_8px_16px_rgba(0,0,0,0.1)] px-8 pt-8 pb-8  lg:py-20">
+            <div className="w-[600px] bg-white rounded-lg shadow-[0_8px_16px_rgba(0,0,0,0.1)] px-8 pt-8 pb-8  lg:py-20">
               <form onSubmit={handleSubmit} className="space-y-3">
 
                 <input
